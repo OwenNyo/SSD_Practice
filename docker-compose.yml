@@ -2,13 +2,18 @@ version: '3.8'
 
 services:
   web:
-    build: .
-    ports:
-      - "5000:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web-server
+    working_dir: /app
     volumes:
       - ./web:/app
     networks:
       - appnet
+    ports:
+      - "8000:5000"
+    entrypoint: ["python", "app.py"]
 
   nginx:
     image: nginx:latest
