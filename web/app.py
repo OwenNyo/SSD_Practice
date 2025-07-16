@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
 import re
 import html
+import bleach
 
 app = Flask(__name__)
 
-# Basic regex patterns for detecting XSS or SQLi (not comprehensive but good for demonstration)
+# Example: what tags and attributes you want to allow (you can allow none)
+ALLOWED_TAGS = []
+ALLOWED_ATTRIBUTES = {}
+
 def is_xss_attack(input_str):
-    xss_pattern = re.compile(r"<script.*?>.*?</script.*?>", re.IGNORECASE)
-    return bool(xss_pattern.search(input_str))
+    cleaned = bleach.clean(input_str, tags=ALLOWED_TAGS, attributes=ALLOWED_ATTRIBUTES)
+    # If cleaned input is different, we assume it contained dangerous content
+    return cleaned != input_str
 
 def is_sql_injection(input_str):
     sql_keywords = ['SELECT', 'INSERT', 'DELETE', 'UPDATE', 'DROP', '--', ';', "' OR '1'='1"]

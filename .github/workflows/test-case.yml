@@ -11,7 +11,7 @@ permissions:
   security-events: read
 
 jobs:
-  test:
+  TestCase:
     runs-on: ubuntu-latest
 
     steps:

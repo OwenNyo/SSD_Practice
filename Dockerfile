@@ -9,3 +9,5 @@ RUN apt-get update && apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
 COPY web /app
+
+CMD ["python", "app.py"]

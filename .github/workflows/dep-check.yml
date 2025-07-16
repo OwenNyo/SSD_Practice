@@ -11,7 +11,7 @@ permissions:
   security-events: write
 
 jobs:
-  combined-scan:
+  SecurityScan:
     runs-on: ubuntu-latest
     name: Secrets + Dependency Audit
 
