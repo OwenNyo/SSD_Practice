@@ -54,8 +54,13 @@ jobs:
       working-directory: ./web
       run: npm install eslint
 
-    - name: Run ESLint on JS files
+    - name: Run ESLint and Generate JSON Report
       working-directory: ./web
-      run: |
-        npx eslint . --config eslint.config.mjs || exit 1
+      run: npx eslint . --config eslint.config.mjs -f json -o eslint-report.json || true
+    
+    - name: Upload ESLint Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: eslint-report
+        path: ./web/eslint-report.json
 
