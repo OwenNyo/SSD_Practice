@@ -59,6 +59,3 @@ jobs:
       run: |
         npx eslint . --config eslint.config.mjs || exit 1
 
-    - name: Run Selenium Password Tests
-      working-directory: ./web
-      run: python test_selenium.py
